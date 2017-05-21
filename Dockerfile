@@ -110,6 +110,8 @@ RUN set -x \
         man \
         mysql-client \
         ncurses-dev \
+        openssh-client \
+        openssh-server \
         powerline \
         python \
         python-dev \
@@ -125,6 +127,7 @@ RUN set -x \
         sbcl \
         silversearcher-ag \
         slime \
+        sshfs \
         sudo \
         tcpdump \
         telnet \
