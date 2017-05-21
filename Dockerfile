@@ -124,6 +124,7 @@ RUN set -x \
         rsync \
         rsyslog \
         ruby \
+        ruby-dev \
         sbcl \
         silversearcher-ag \
         slime \
