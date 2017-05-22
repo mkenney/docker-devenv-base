@@ -209,7 +209,6 @@ RUN set -x \
         --with-features=huge \
         --enable-perlinterp \
         --enable-pythoninterp \
-        --enable-python3interp \
         --enable-rubyinterp \
     && make \
     && make install \
