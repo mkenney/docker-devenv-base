@@ -143,9 +143,6 @@ RUN set -x \
 ENV NODE_VERSION v7.7.4
 ENV NODE_PREFIX /usr/local
 RUN set -x \
-    # build requirements
-    && apt-get install -qqy \
-        paxctl \
     # Download and validate the NodeJs source
 #    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
 #        9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -170,22 +167,20 @@ RUN set -x \
     && export GYP_DEFINES="linux_use_gold_flags=0" \
     && ./configure --prefix=${NODE_PREFIX} \
     && NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-    && make -j${NPROC} -C out mksnapshot BUILDTYPE=Release \
-    && paxctl -cm out/Release/mksnapshot \
     && make -j${NPROC} \
     && make install \
-    && paxctl -cm ${NODE_PREFIX}/bin/node \
     && cd / \
-    && rm -rf /node_src
+    && rm -rf /node_src \
 
 ##############################################################################
 # current npm and node tools
 ##############################################################################
 
-RUN set -x \
+#RUN set -x \
     # Upgrade npm
     # Don't use npm to self-upgrade, see issue https://github.com/npm/npm/issues/9863
-    && curl -L https://npmjs.org/install.sh | sh \
+    #&& curl -L https://npmjs.org/install.sh | sh \
+    && npm install -g npm@latest \
 
     # Install node packages
     && npm install --silent -g \
